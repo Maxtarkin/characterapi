@@ -1,0 +1,91 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1.0.2
+      author: Maxim Tarala
+      context: development
+      changes:
+        - tagDatabase:
+            tag: attribute_block_creation
+        - createTable:
+            tableName: attribute_block
+            schemaName: character
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_attribute_block
+                    nullable: false
+              - column:
+                  name: version
+                  type: bigint
+              - column:
+                  name: create_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_date
+                  type: timestamp
+              - column:
+                  name: creator_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updater_id
+                  type: uuid
+              - column:
+                  name: proficiency_bonus
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: passive_perception
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: strength_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_strength
+                    references: character.strength(id)
+              - column:
+                  name: dexterity_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_dexterity
+                    references: character.dexterity(id)
+              - column:
+                  name: constitution_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_constitution
+                    references: character.constitution(id)
+              - column:
+                  name: intelligence_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_intelligence
+                    references: character.intelligence(id)
+              - column:
+                  name: wisdom_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_wisdom
+                    references: character.wisdom(id)
+              - column:
+                  name: charisma_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_charisma
+                    references: character.charisma(id)
