@@ -1,0 +1,7 @@
+changeLogFile: db/changelog/db.changelog-master.yml
+url: jdbc:postgresql://localhost:5432/characterCreator
+username: char
+password: 123char456
+driver: org.postgresql.Driver
+rollbackTag: character_schema_creation
+classpath: db/changelog/db.changelog-master.yml

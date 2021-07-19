@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      file: v1.0/changelog-develop-v1.0-cumulative.yml
+      relativeToChangelogFile: true
+  - include:
+      file: v1.0/test/changelog-test_data-v1.0-cumulative.yml
+      relativeToChangelogFile: true

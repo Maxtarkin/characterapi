@@ -1,0 +1,398 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1.0.1
+      author: Maxim Tarala
+      context: development
+      changes:
+        - tagDatabase:
+            tag: attribute_creation
+        - createTable:
+            tableName: strength
+            schemaName: character
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_strength
+                    nullable: false
+              - column:
+                  name: version
+                  type: bigint
+              - column:
+                  name: create_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_date
+                  type: timestamp
+              - column:
+                  name: creator_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updater_id
+                  type: uuid
+              - column:
+                  name: current_value
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modifier
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: athletics_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: dexterity
+            schemaName: character
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_dexterity
+                    nullable: false
+              - column:
+                  name: version
+                  type: bigint
+              - column:
+                  name: create_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_date
+                  type: timestamp
+              - column:
+                  name: creator_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updater_id
+                  type: uuid
+              - column:
+                  name: current_value
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modifier
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sleight_of_hand_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: acrobatics_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: stealth_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: constitution
+            schemaName: character
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_constitution
+                    nullable: false
+              - column:
+                  name: version
+                  type: bigint
+              - column:
+                  name: create_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_date
+                  type: timestamp
+              - column:
+                  name: creator_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updater_id
+                  type: uuid
+              - column:
+                  name: current_value
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modifier
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: intelligence
+            schemaName: character
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_intelligence
+                    nullable: false
+              - column:
+                  name: version
+                  type: bigint
+              - column:
+                  name: create_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_date
+                  type: timestamp
+              - column:
+                  name: creator_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updater_id
+                  type: uuid
+              - column:
+                  name: current_value
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modifier
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: arcane_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: history_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: investigation_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: nature_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: religion_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: wisdom
+            schemaName: character
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_wisdom
+                    nullable: false
+              - column:
+                  name: version
+                  type: bigint
+              - column:
+                  name: create_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_date
+                  type: timestamp
+              - column:
+                  name: creator_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updater_id
+                  type: uuid
+              - column:
+                  name: current_value
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modifier
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: animal_handling_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: insight_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: medicine_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: perception_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: survival_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: charisma
+            schemaName: character
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_charisma
+                    nullable: false
+              - column:
+                  name: version
+                  type: bigint
+              - column:
+                  name: create_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_date
+                  type: timestamp
+              - column:
+                  name: creator_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updater_id
+                  type: uuid
+              - column:
+                  name: current_value
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modifier
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: deception_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: intimidation_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: performance_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: persuasion_proficiency
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false

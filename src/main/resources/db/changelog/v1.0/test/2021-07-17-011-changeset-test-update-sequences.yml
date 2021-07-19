@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: test 1.0.0
+      author: Maxim Tarala
+      context: test
+      changes:
+        - tagDatabase:
+            tag: test_data_insertion
+        - sql:
+            sql: SELECT setval('character.strength_id_seq', (SELECT MAX(id) FROM character.strength))
+        - sql:
+            sql: SELECT setval('character.dexterity_id_seq', (SELECT MAX(id) FROM character.dexterity))
+        - sql:
+            sql: SELECT setval('character.constitution_id_seq', (SELECT MAX(id) FROM character.constitution))
+        - sql:
+            sql: SELECT setval('character.intelligence_id_seq', (SELECT MAX(id) FROM character.intelligence))
+        - sql:
+            sql: SELECT setval('character.wisdom_id_seq', (SELECT MAX(id) FROM character.wisdom))
+        - sql:
+            sql: SELECT setval('character.charisma_id_seq', (SELECT MAX(id) FROM character.charisma))
+        - sql:
+            sql: SELECT setval('character.attribute_block_id_seq', (SELECT MAX(id) FROM character.attribute_block))
+        - sql:
+            sql: SELECT setval('character.character_model_id_seq', (SELECT MAX(id) FROM character.character_model))

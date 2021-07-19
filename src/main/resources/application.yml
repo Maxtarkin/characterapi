@@ -1,0 +1,40 @@
+server:
+  port: 8080
+  max-http-header-size: 131072
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: on_param
+    include-exception: false
+spring:
+  profiles:
+    active: @activeProfiles@
+  datasource:
+    password: ${db.password}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: false
+    properties:
+      javax:
+        persistence:
+          sharedCache:
+            #required - enable selective caching mode - only entities with @Cacheable annotation will use L2 cache.
+            mode: ENABLE_SELECTIVE
+      hibernate:
+        format_sql: true
+        generate_statistics: true
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        cache:
+          use_second_level_cache: true
+          use_query_cache: true
+          region:
+            factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yml
+    contexts: '!test, development'
+management:
+  endpoints:
+    enabled-by-default: false

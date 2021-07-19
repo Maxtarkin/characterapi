@@ -1,0 +1,605 @@
+openapi: 3.0.3
+info:
+  version: 1.0.0
+  title: 'Character Creator Api'
+  description: API to help with D&D character creation
+  contact:
+    email: maxim-tarala@mail.ru
+    name: Maxim Tarala
+
+paths:
+  /character:
+    post:
+      tags:
+        - Character
+      operationId: createCharacter
+      summary: Create a new character
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CharacterCreateRequest'
+      responses:
+        '201':
+          description: successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseIdResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseErrorResponse'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseErrorResponse'
+
+  /character/{characterId}:
+    delete:
+      tags:
+        - Character
+      operationId: deleteCharacterById
+      summary: Delete a character by identifier
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          description: character identifier
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful delete operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseResponse'
+        '404':
+          description: Character not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseErrorResponse'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseErrorResponse'
+    get:
+      tags:
+        - Character
+      operationId: getCharacterDetailInfoById
+      summary: Get a new character by identifier
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          description: character identifier
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: character detail information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterDetailInfoResponse'
+        '404':
+          description: Character not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseErrorResponse'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseErrorResponse'
+    patch:
+      tags:
+        - Character
+      operationId: updateCharacterById
+      summary: Update a character by identifier
+      parameters:
+        - name: characterId
+          in: path
+          required: true
+          description: Character identifier
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CharacterUpdateRequest'
+      responses:
+        '200':
+          description: successfull request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseIdResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseErrorResponse'
+        '404':
+          description: Character not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseErrorResponse'
+        '500':
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseErrorResponse'
+
+components:
+  schemas:
+    BaseResponse:
+      description: Basic information
+      type: object
+      required:
+        - success
+      properties:
+        success:
+          description: Request success rate
+          default: true
+          type: boolean
+
+    BaseErrorResponse:
+      type: object
+      required:
+        - statusCode
+        - success
+      properties:
+        success:
+          description: Succes request - always false
+          type: boolean
+          default: false
+        statusCode:
+          type: integer
+        className:
+          type: string
+        methodName:
+          type: string
+        message:
+          type: string
+        stackTrace:
+          type: object
+
+    BaseIdResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+
+    CharacterCreateRequest:
+      type: object
+      required:
+        - name
+        - level
+        - attributeBlock
+      properties:
+        name:
+          nullable: false
+          type: string
+          maxLength: 64
+        level:
+          nullable: false
+          type: integer
+          format: int8
+          minimum: 1
+          maximum: 20
+        attributeBlock:
+          $ref: '#/components/schemas/AttributeBlockCreate'
+
+    CharacterUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 64
+        level:
+          type: integer
+          format: int8
+          minimum: 1
+          maximum: 20
+        attributeBlock:
+          $ref: '#/components/schemas/AttributeBlockUpdate'
+
+    CharacterDetailInfoResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/CharacterDetailInfo'
+
+    AttributeBlockCreate:
+      type: object
+      description: Attribute set of a character
+      required:
+        - strength
+        - dexterity
+        - constitution
+        - intelligence
+        - wisdom
+        - charisma
+      properties:
+        strength:
+          $ref: '#/components/schemas/StrengthAttributeCreate'
+        dexterity:
+          $ref: '#/components/schemas/DexterityAttributeCreate'
+        constitution:
+          $ref: '#/components/schemas/ConstitutionAttributeCreate'
+        intelligence:
+          $ref: '#/components/schemas/IntelligenceAttributeCreate'
+        wisdom:
+          $ref: '#/components/schemas/WisdomAttributeCreate'
+        charisma:
+          $ref: '#/components/schemas/CharismaAttributeCreate'
+
+    AttributeBlockUpdate:
+      type: object
+      description: Attribute set of a character
+      properties:
+        strength:
+          $ref: '#/components/schemas/StrengthAttributeUpdate'
+        dexterity:
+          $ref: '#/components/schemas/DexterityAttributeUpdate'
+        constitution:
+          $ref: '#/components/schemas/ConstitutionAttributeUpdate'
+        intelligence:
+          $ref: '#/components/schemas/IntelligenceAttributeUpdate'
+        wisdom:
+          $ref: '#/components/schemas/WisdomAttributeUpdate'
+        charisma:
+          $ref: '#/components/schemas/CharismaAttributeUpdate'
+
+    BaseAttributeCreate:
+      type: object
+      required:
+        - currentValue
+      properties:
+        currentValue:
+          type: integer
+          format: int8
+          minimum: 1
+          maximum: 30
+        proficiency:
+          type: boolean
+          default: false
+
+    BaseAttributeUpdate:
+      type: object
+      properties:
+        currentValue:
+          type: integer
+          format: int8
+          minimum: 1
+          maximum: 30
+        proficiency:
+          type: boolean
+
+    StrengthAttributeCreate:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeCreate'
+      type: object
+      properties:
+        athleticsProficiency:
+          type: boolean
+          default: false
+
+    StrengthAttributeUpdate:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeUpdate'
+      type: object
+      properties:
+        athleticsProficiency:
+          type: boolean
+
+    DexterityAttributeCreate:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeCreate'
+      type: object
+      properties:
+        acrobaticsProficiency:
+          type: boolean
+          default: false
+        sleightOfHandProficiency:
+          type: boolean
+          default: false
+        stealthProficiency:
+          type: boolean
+          default: false
+
+    DexterityAttributeUpdate:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeUpdate'
+      type: object
+      properties:
+        acrobaticsProficiency:
+          type: boolean
+        sleightOfHandProficiency:
+          type: boolean
+        stealthProficiency:
+          type: boolean
+
+    ConstitutionAttributeCreate:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeCreate'
+      type: object
+
+    ConstitutionAttributeUpdate:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeUpdate'
+      type: object
+
+    IntelligenceAttributeCreate:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeCreate'
+      type: object
+      properties:
+        arcaneProficiency:
+          type: boolean
+          default: false
+        historyProficiency:
+          type: boolean
+          default: false
+        investigationProficiency:
+          type: boolean
+          default: false
+        natureProficiency:
+          type: boolean
+          default: false
+        religionProficiency:
+          type: boolean
+          default: false
+
+    IntelligenceAttributeUpdate:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeUpdate'
+      type: object
+      properties:
+        arcaneProficiency:
+          type: boolean
+        historyProficiency:
+          type: boolean
+        investigationProficiency:
+          type: boolean
+        natureProficiency:
+          type: boolean
+        religionProficiency:
+          type: boolean
+
+    WisdomAttributeCreate:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeCreate'
+      type: object
+      properties:
+        animalHandlingProficiency:
+          type: boolean
+          default: false
+        insightProficiency:
+          type: boolean
+          default: false
+        medicineProficiency:
+          type: boolean
+          default: false
+        perceptionProficiency:
+          type: boolean
+          default: false
+        survivalProficiency:
+          type: boolean
+          default: false
+
+    WisdomAttributeUpdate:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeUpdate'
+      type: object
+      properties:
+        animalHandlingProficiency:
+          type: boolean
+        insightProficiency:
+          type: boolean
+        medicineProficiency:
+          type: boolean
+        perceptionProficiency:
+          type: boolean
+        survivalProficiency:
+          type: boolean
+
+    CharismaAttributeCreate:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeCreate'
+      type: object
+      properties:
+        deceptionProficiency:
+          type: boolean
+          default: false
+        intimidationProficiency:
+          type: boolean
+          default: false
+        performanceProficiency:
+          type: boolean
+          default: false
+        persuasionProficiency:
+          type: boolean
+          default: false
+
+    CharismaAttributeUpdate:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeUpdate'
+      type: object
+      properties:
+        deceptionProficiency:
+          type: boolean
+        intimidationProficiency:
+          type: boolean
+        performanceProficiency:
+          type: boolean
+        persuasionProficiency:
+          type: boolean
+
+    CharacterDetailInfo:
+      allOf:
+        - $ref: '#/components/schemas/CharacterInfo'
+      type: object
+      properties:
+        attributeBlockInfo:
+          $ref: '#/components/schemas/AttributeBlockInfo'
+
+
+    CharacterInfo:
+      type: object
+      required:
+        - id
+        - name
+        - level
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        level:
+          type: integer
+          format: int8
+
+    AttributeBlockInfo:
+      type: object
+      required:
+        - strength
+        - dexterity
+        - constitution
+        - intelligence
+        - wisdom
+        - charisma
+        - passivePerception
+        - proficiencyBonus
+      properties:
+        strength:
+          $ref: '#/components/schemas/StrengthAttributeInfo'
+        dexterity:
+          $ref: '#/components/schemas/DexterityAttributeInfo'
+        constitution:
+          $ref: '#/components/schemas/ConstitutionAttributeInfo'
+        intelligence:
+          $ref: '#/components/schemas/IntelligenceAttributeInfo'
+        wisdom:
+          $ref: '#/components/schemas/WisdomAttributeInfo'
+        charisma:
+          $ref: '#/components/schemas/CharismaAttributeInfo'
+        passivePerception:
+          type: integer
+          format: int8
+        proficiencyBonus:
+          type: integer
+          format: int8
+
+    BaseAttributeInfo:
+      type: object
+      required:
+        - currentValue
+        - modifier
+        - proficiency
+      properties:
+        currentValue:
+          type: integer
+          format: int8
+        modifier:
+          type: integer
+          format: int8
+        proficiency:
+          type: boolean
+
+    StrengthAttributeInfo:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeInfo'
+      type: object
+      properties:
+        athleticsProficiency:
+          type: boolean
+
+    DexterityAttributeInfo:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeInfo'
+      type: object
+      properties:
+        acrobaticsProficiency:
+          type: boolean
+        sleightOfHandProficiency:
+          type: boolean
+        stealthProficiency:
+          type: boolean
+
+    ConstitutionAttributeInfo:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeInfo'
+      type: object
+
+    IntelligenceAttributeInfo:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeInfo'
+      type: object
+      properties:
+        arcaneProficiency:
+          type: boolean
+        historyProficiency:
+          type: boolean
+        investigationProficiency:
+          type: boolean
+        natureProficiency:
+          type: boolean
+        religionProficiency:
+          type: boolean
+
+    WisdomAttributeInfo:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeInfo'
+      type: object
+      properties:
+        animalHandlingProficiency:
+          type: boolean
+        insightProficiency:
+          type: boolean
+        medicineProficiency:
+          type: boolean
+        perceptionProficiency:
+          type: boolean
+        survivalProficiency:
+          type: boolean
+
+    CharismaAttributeInfo:
+      allOf:
+        - $ref: '#/components/schemas/BaseAttributeInfo'
+      type: object
+      properties:
+        deceptionProficiency:
+          type: boolean
+        intimidationProficiency:
+          type: boolean
+        performanceProficiency:
+          type: boolean
+        persuasionProficiency:
+          type: boolean

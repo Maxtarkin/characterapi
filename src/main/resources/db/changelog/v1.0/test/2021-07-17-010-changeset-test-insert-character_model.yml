@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: test 1.0.0
+      author: Maxim Tarala
+      context: test
+      changes:
+        - tagDatabase:
+            tag: test_data_insertion
+        - insert:
+            tableName: character_model
+            schemaName: character
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: version
+                  value: 1
+              - column:
+                  name: create_date
+                  value: 2021-01-01 00:00:00.000000
+              - column:
+                  name: creator_id
+                  value: 00000000-0000-0000-0000-000000000000
+              - column:
+                  name: name
+                  value: Freshman
+              - column:
+                  name: level
+                  value: 1
+              - column:
+                  name: attribute_block_id
+                  value: 1
+        - insert:
+            tableName: character_model
+            schemaName: character
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: version
+                  value: 1
+              - column:
+                  name: create_date
+                  value: 2021-01-01 00:00:00.000000
+              - column:
+                  name: creator_id
+                  value: 00000000-0000-0000-0000-000000000000
+              - column:
+                  name: name
+                  value: Knowledgeable
+              - column:
+                  name: level
+                  value: 10
+              - column:
+                  name: attribute_block_id
+                  value: 2

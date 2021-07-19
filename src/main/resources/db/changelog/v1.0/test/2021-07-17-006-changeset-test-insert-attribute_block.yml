@@ -1,0 +1,88 @@
+databaseChangeLog:
+  - changeSet:
+      id: test 1.0.0
+      author: Maxim Tarala
+      context: test
+      changes:
+        - tagDatabase:
+            tag: test_data_insertion
+        - insert:
+            tableName: attribute_block
+            schemaName: character
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: version
+                  value: 1
+              - column:
+                  name: create_date
+                  value: 2021-01-01 00:00:00.000000
+              - column:
+                  name: creator_id
+                  value: 00000000-0000-0000-0000-000000000000
+              - column:
+                  name: proficiency_bonus
+                  value: 2
+              - column:
+                  name: passive_perception
+                  value: 10
+              - column:
+                  name: strength_id
+                  value: 1
+              - column:
+                  name: dexterity_id
+                  value: 1
+              - column:
+                  name: constitution_id
+                  value: 1
+              - column:
+                  name: intelligence_id
+                  value: 1
+              - column:
+                  name: wisdom_id
+                  value: 1
+              - column:
+                  name: charisma_id
+                  value: 1
+        - insert:
+            tableName: attribute_block
+            schemaName: character
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: version
+                  value: 1
+              - column:
+                  name: create_date
+                  value: 2021-01-01 00:00:00.000000
+              - column:
+                  name: creator_id
+                  value: 00000000-0000-0000-0000-000000000000
+              - column:
+                  name: proficiency_bonus
+                  value: 4
+              - column:
+                  name: passive_perception
+                  value: 14
+              - column:
+                  name: strength_id
+                  value: 2
+              - column:
+                  name: dexterity_id
+                  value: 2
+              - column:
+                  name: constitution_id
+                  value: 2
+              - column:
+                  name: intelligence_id
+                  value: 2
+              - column:
+                  name: wisdom_id
+                  value: 2
+              - column:
+                  name: charisma_id
+                  value: 2

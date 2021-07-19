@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1.0.3
+      author: Maxim Tarala
+      context: development
+      changes:
+        - tagDatabase:
+            tag: character_model_creation
+        - createTable:
+            tableName: character_model
+            schemaName: character
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_character_model
+                    nullable: false
+              - column:
+                  name: version
+                  type: bigint
+              - column:
+                  name: create_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: update_date
+                  type: timestamp
+              - column:
+                  name: creator_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updater_id
+                  type: uuid
+              - column:
+                  name: name
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: level
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: attribute_block_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_attribute_block
+                    references: character.attribute_block(id)
+

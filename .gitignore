@@ -45,3 +45,4 @@ buildNumber.properties
 *.iml
 out
 gen
+/info/api/generated/

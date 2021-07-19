@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: test 1.0.0
+      author: Maxim Tarala
+      context: test
+      changes:
+        - tagDatabase:
+            tag: test_data_insertion
+        - insert:
+            tableName: strength
+            schemaName: character
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: version
+                  value: 1
+              - column:
+                  name: create_date
+                  value: 2021-01-01 00:00:00.000000
+              - column:
+                  name: creator_id
+                  value: 00000000-0000-0000-0000-000000000000
+              - column:
+                  name: current_value
+                  value: 10
+              - column:
+                  name: modifier
+                  value: 0
+              - column:
+                  name: proficiency
+                  value: false
+              - column:
+                  name: athletics_proficiency
+                  value: false
+        - insert:
+            tableName: strength
+            schemaName: character
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: version
+                  value: 1
+              - column:
+                  name: create_date
+                  value: 2021-01-01 00:00:00.000000
+              - column:
+                  name: creator_id
+                  value: 00000000-0000-0000-0000-000000000000
+              - column:
+                  name: current_value
+                  value: 16
+              - column:
+                  name: modifier
+                  value: 3
+              - column:
+                  name: proficiency
+                  value: false
+              - column:
+                  name: athletics_proficiency
+                  value: false

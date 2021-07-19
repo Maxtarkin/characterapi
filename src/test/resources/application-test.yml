@@ -1,0 +1,16 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default-schema: character
+  test:
+    database:
+      replace: none
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yml
+    contexts: 'test, development'
+logging:
+  level:
+    liquibase: INFO
